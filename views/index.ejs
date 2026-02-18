@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Payroll System</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <h1>Employee Dashboard</h1>
+    <a href="/register">Add New Employee</a>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Department</th>
+                <th>Basic Salary</th>
+                <th>Tax (12%)</th>
+                <th>Net Salary</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% employees.forEach(employee=> { %>
+                <% const tax=employee.salary * 0.12; %>
+                    <% const netSalary=employee.salary - tax; %>
+                        <tr>
+                            <td>
+                                <%= employee.id %>
+                            </td>
+                            <td>
+                                <%= employee.name %>
+                            </td>
+                            <td>
+                                <%= employee.department %>
+                            </td>
+                            <td>$<%= employee.salary %>
+                            </td>
+                            <td>$<%= tax.toFixed(2) %>
+                            </td>
+                            <td>$<%= netSalary.toFixed(2) %>
+                            </td>
+                            <td>
+                                <a href="/edit/<%= employee.id %>">Edit</a> |
+                                <a href="/delete/<%= employee.id %>"
+                                    onclick="return confirm('Are you sure?')">Delete</a>
+                            </td>
+                        </tr>
+                        <% }); %>
+        </tbody>
+    </table>
+</body>
+
+</html>
